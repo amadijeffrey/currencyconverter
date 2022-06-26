@@ -10,8 +10,8 @@ class CurrencyList extends Component {
 
             return <tr key={index}>
                 <td>{currencyData.pair}</td>
-                <td>{Number(currencyData.bid).toFixed(10)}</td>
-                <td>{Number(currencyData.ask).toFixed(10)}</td>
+                <td>{Number(currencyData.bid).toFixed(7)}</td>
+                <td>{Number(currencyData.ask).toFixed(7)}</td>
             </tr>
 
         })

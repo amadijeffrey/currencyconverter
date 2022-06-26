@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import SearchBar from './components/searchBar'
 import PaginatedItem from './components/paginatedItem'
-import { BACKEND_API } from './env'
 import axios from 'axios'
 import _ from 'lodash'
 
@@ -13,15 +12,13 @@ function App() {
   const getData = async (selectedCurrencies) => {
     const allCurrencies = _.map(selectedCurrencies, currency => currency.value)
     const currencylist = allCurrencies.join()
-    const url = `${BACKEND_API}?list=${currencylist}`
-    const currenciesData = await axios.get(url)
+    const currenciesData = await axios.get(`https://apicurrencyconverter.herokuapp.com/currency?list=${currencylist}`)
     setList(currenciesData.data)
     setCurrency(currencylist)
   }
 
   const returnPaginatedItem = (list, itemsPerPage) => {
-    console.log(itemsPerPage, 'hjgj', list)
-    const sizing = (list.length === 1) ? 'col-lg-12' : 'col-lg-6'
+    const sizing = (list.length <= 1) ? 'col-lg-12' : 'col-lg-6'
     return list.map((currency, i) => {
       return <div className={sizing} key={i}>
         <PaginatedItem allCurrencyData={currency.List}
@@ -31,7 +28,9 @@ function App() {
   }
 
   return (
+    <>
     <div className="App container">
+      <div className='jumbotron'>CURRENCYCONVERTER<img src='/currency.png' style={{width: '50px', marginLeft: '5px', paddingBottom: '4px'}} alt='login'/></div>
       <SearchBar onButtonClick={(selectedCurrencies) => getData(selectedCurrencies)}
         onInputChange={(value) => setItemsPerPage(value)}
         currency={currency} />
@@ -39,6 +38,7 @@ function App() {
         {returnPaginatedItem(list, itemsPerPage)}
       </div>
     </div>
+    </>
   );
 }
 

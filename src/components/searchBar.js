@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import showCheckboxes from '../scripts'
+import Swal from 'sweetalert2'
 
 class SearchBar extends Component {
   constructor(){
@@ -11,6 +12,16 @@ class SearchBar extends Component {
     getData(e) {
         e.preventDefault()
         const selectedCurrencies = document.querySelectorAll('input[type="checkbox"]:checked')
+        const value = document.querySelector('#numOfItems').value
+        console.log(value)
+        if(value === 'items per page'){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Did you select number of items per page?',
+              })
+            return
+        }
         this.props.onButtonClick(selectedCurrencies)
 
     }
@@ -24,7 +35,7 @@ class SearchBar extends Component {
             <div className='m-3'>
                 <form onSubmit={this.getData}>
                     <select id='numOfItems' onChange={this.setNumOfItems}>
-                        <option>number per page</option>
+                        <option id='selected'>items per page</option>
                         <option>10</option>
                         <option>15</option>
                         <option>20</option>
@@ -32,8 +43,8 @@ class SearchBar extends Component {
                     <div className="multipleSelection">
                         <div className="selectBox"
                             onClick={showCheckboxes}>
-                            <select>
-                                <option>select a currency to see its exchange rates</option>
+                            <select className='option'>
+                                <option>select a currency(ies) to see its exchange rates</option>
                             </select>
                             <div className="overSelect"></div>
                         </div>
@@ -58,7 +69,7 @@ class SearchBar extends Component {
                             </label>
                         </div>
                     </div>
-                    <input id='button' type='submit' className='btn btn-primary' value='getPrice' />
+                    <input id='button' type='submit' className='btn btn-success' value='getPrice' />
                 </form>
                 <h4 className='heading'>{this.props.currency }</h4>
             </div>

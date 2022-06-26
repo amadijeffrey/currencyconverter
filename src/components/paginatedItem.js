@@ -7,7 +7,6 @@ function PaginatedItem({ itemsPerPage, allCurrencyData }) {
     const [currentItems, setCurrentItems] = useState(null);
     const [pageCount, setPageCount] = useState(0);
     const [itemOffset, setItemOffset] = useState(0);
-    console.log('fgndj')
 
     useEffect(() => {
         // Fetch items from another resources.
@@ -25,7 +24,7 @@ function PaginatedItem({ itemsPerPage, allCurrencyData }) {
     };
 
     return (
-        <div>
+        <div className='content'>
             <CurrencyList currentItems={currentItems}  />
             <ReactPaginate
                 breakLabel="..."
