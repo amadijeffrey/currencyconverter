@@ -30,7 +30,7 @@ function App() {
   return (
     <>
     <div className="App container">
-      <div className='jumbotron'>CURRENCYCONVERTER<img src='/currency.png' style={{width: '50px', marginLeft: '5px', paddingBottom: '4px'}} alt='login'/></div>
+      <div className='jumbotron'>CURRENCYCONVERTER<img src='/currency.png' style={{width: '50px', marginLeft: '5px', paddingBottom: '4px'}} alt='currency'/></div>
       <SearchBar onButtonClick={(selectedCurrencies) => getData(selectedCurrencies)}
         onInputChange={(value) => setItemsPerPage(value)}
         currency={currency} />
